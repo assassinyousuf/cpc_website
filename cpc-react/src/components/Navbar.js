@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <img src="/CPC Logo.svg" alt="DIU CPC Logo" className="me-2" />
+          <img src="/cpc_website/CPC Logo.svg" alt="DIU CPC Logo" className="me-2" />
           DIU CPC
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
