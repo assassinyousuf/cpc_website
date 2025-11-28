@@ -363,7 +363,7 @@ const Team = () => {
                 animation: 'shimmer 3s ease-in-out infinite'
               }}></div>
               <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                <img src="/icon/user.png" className="card-img-top" alt={member.name} style={{
+                <img src="/cpc_website/icon/user.png" className="card-img-top" alt={member.name} style={{
                   width: '80px',
                   height: '80px',
                   borderRadius: '50%',
@@ -469,7 +469,7 @@ const Team = () => {
                 animation: 'shimmer 3s ease-in-out infinite'
               }}></div>
               <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                <img src="/icon/user.png" className="card-img-top" alt={member.name} style={{
+                <img src="/cpc_website/icon/user.png" className="card-img-top" alt={member.name} style={{
                   width: '70px',
                   height: '70px',
                   borderRadius: '50%',
