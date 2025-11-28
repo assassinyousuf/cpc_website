@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/cpc_website/static/css/main.337ff789.css",
-    "main.js": "/cpc_website/static/js/main.8ef2386d.js",
+    "main.js": "/cpc_website/static/js/main.2a0b71b7.js",
     "static/js/453.ac2f4bac.chunk.js": "/cpc_website/static/js/453.ac2f4bac.chunk.js",
     "index.html": "/cpc_website/index.html",
     "main.337ff789.css.map": "/cpc_website/static/css/main.337ff789.css.map",
-    "main.8ef2386d.js.map": "/cpc_website/static/js/main.8ef2386d.js.map",
+    "main.2a0b71b7.js.map": "/cpc_website/static/js/main.2a0b71b7.js.map",
     "453.ac2f4bac.chunk.js.map": "/cpc_website/static/js/453.ac2f4bac.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.337ff789.css",
-    "static/js/main.8ef2386d.js"
+    "static/js/main.2a0b71b7.js"
   ]
 }
