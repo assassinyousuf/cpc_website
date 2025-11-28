@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/cpc_website/static/css/main.337ff789.css",
+    "main.js": "/cpc_website/static/js/main.e26d02fa.js",
+    "static/js/453.ac2f4bac.chunk.js": "/cpc_website/static/js/453.ac2f4bac.chunk.js",
+    "index.html": "/cpc_website/index.html",
+    "main.337ff789.css.map": "/cpc_website/static/css/main.337ff789.css.map",
+    "main.e26d02fa.js.map": "/cpc_website/static/js/main.e26d02fa.js.map",
+    "453.ac2f4bac.chunk.js.map": "/cpc_website/static/js/453.ac2f4bac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.337ff789.css",
+    "static/js/main.e26d02fa.js"
+  ]
+}
