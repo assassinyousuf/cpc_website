@@ -71,11 +71,11 @@ async function loadEvents() {
         const events = await response.json();
         const container = document.getElementById('events-container');
         if (container) {
-            let html = '<h2>Upcoming Events</h2><table class="table"><thead><tr><th>Date</th><th>Event</th><th>Description</th></tr></thead><tbody>';
+            let html = '<h2>Upcoming Events</h2><div class="table-responsive"><table class="table"><thead><tr><th>Date</th><th>Event</th><th>Description</th></tr></thead><tbody>';
             events.forEach(event => {
                 html += `<tr><td>${event.date}</td><td>${event.event}</td><td>${event.description}</td></tr>`;
             });
-            html += '</tbody></table>';
+            html += '</tbody></table></div>';
             container.innerHTML = html;
         }
     } catch (error) {

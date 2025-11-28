@@ -9,88 +9,380 @@
     <link rel="stylesheet" href="styles.css">
     <meta name="description" content="Photo albums and videos from DIU CPC events.">
     <meta name="keywords" content="DIU CPC gallery, photos, videos, contests">
+    <style>
+        .gallery-hero {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="30" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="70" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="80" r="0.3" fill="rgba(255,255,255,0.03)"/><circle cx="90" cy="20" r="0.3" fill="rgba(255,255,255,0.03)"/></svg>') repeat;
+            opacity: 0.5;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        .album-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(135, 206, 235, 0.1) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(135, 206, 235, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(135, 206, 235, 0.6);
+        }
+
+        .album-image {
+            height: 200px;
+            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-image i {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .album-content {
+            padding: 20px;
+        }
+
+        .album-title {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .album-description {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .album-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #87CEEB;
+        }
+
+        .video-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(245, 101, 101, 0.1) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(245, 101, 101, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(245, 101, 101, 0.6);
+        }
+
+        .video-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .video-description {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #87CEEB;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.3rem;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(16, 185, 129, 0.1) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .stats-number {
+            color: #10b981;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stats-label {
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(15, 15, 35, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(135, 206, 235, 0.3);">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="CPC Logo.svg" alt="DIU CPC Logo" height="40" class="me-2">
-                DIU CPC
+                <img src="CPC Logo.svg" alt="DIU CPC Logo" class="me-2" style="height: 40px;">
+                <span style="color: #87CEEB; font-weight: 700;">DIU CPC</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
-                    <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html" style="color: #fff;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html" style="color: #fff;">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html" style="color: #fff;">Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gallery.html" style="color: #87CEEB; font-weight: 600;">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html" style="color: #fff;">Committee</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resources.html" style="color: #fff;">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html" style="color: #fff;">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="container my-5">
-        <h1 class="section-title">Gallery</h1>
-        <h2>Photo Albums</h2>
-        <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://via.placeholder.com/800x400?text=Workshop+Photo" class="d-block w-100 gallery-img" alt="Web Development Workshop" loading="lazy">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Web Development Workshop</h5>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/800x400?text=Contest+Photo" class="d-block w-100 gallery-img" alt="Programming Contest" loading="lazy">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Monthly Programming Contest</h5>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/800x400?text=NASA+Award" class="d-block w-100 gallery-img" alt="NASA Challenge Award" loading="lazy">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Team Polaris receiving appreciation for Meteor Shield</h5>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+    <section class="gallery-hero">
+        <div class="container">
+            <h1 style="color: #fff; font-size: 3rem; font-weight: 700; margin-bottom: 20px;">
+                <i class="fas fa-images" style="margin-right: 15px; color: #87CEEB;"></i>
+                Gallery
+            </h1>
+            <p style="color: #ccc; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+                Capturing moments of innovation, learning, and achievement from our programming community
+            </p>
         </div>
-        <h2>Videos</h2>
-        <div class="ratio ratio-16x9">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
-        </div>
-        <p>Live sessions from our YouTube channel.</p>
     </section>
 
-    <!-- Modal for image lightbox -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Image</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <section class="container my-5">
+        <!-- Statistics Section -->
+        <div class="row mb-5">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number">50+</div>
+                    <div class="stats-label">Events Covered</div>
                 </div>
-                <div class="modal-body text-center">
-                    <img id="modalImage" src="" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number">1000+</div>
+                    <div class="stats-label">Photos</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number">25+</div>
+                    <div class="stats-label">Videos</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number">5</div>
+                    <div class="stats-label">Years of Memories</div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 DIU CPC. All rights reserved.</p>
+        <!-- Photo Albums Section -->
+        <h2 class="section-title">Photo Albums</h2>
+        <p class="section-subtitle">Explore our collection of memorable moments from workshops, contests, and events</p>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="album-card">
+                    <div class="album-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">Web Development Workshop</h3>
+                        <p class="album-description">Hands-on session covering modern web technologies including React, Node.js, and responsive design principles.</p>
+                        <div class="album-meta">
+                            <span><i class="fas fa-calendar-alt"></i> Dec 2024</span>
+                            <span><i class="fas fa-images"></i> 25 photos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="album-card">
+                    <div class="album-image">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">Monthly Programming Contest</h3>
+                        <p class="album-description">Intense coding competition featuring algorithmic challenges and problem-solving under time constraints.</p>
+                        <div class="album-meta">
+                            <span><i class="fas fa-calendar-alt"></i> Nov 2024</span>
+                            <span><i class="fas fa-images"></i> 32 photos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="album-card">
+                    <div class="album-image">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">NASA Space Apps Challenge</h3>
+                        <p class="album-description">Team Polaris receiving recognition for their innovative Meteor Shield project at the international space apps challenge.</p>
+                        <div class="album-meta">
+                            <span><i class="fas fa-calendar-alt"></i> Oct 2024</span>
+                            <span><i class="fas fa-images"></i> 18 photos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="album-card">
+                    <div class="album-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">AI & Machine Learning Seminar</h3>
+                        <p class="album-description">Exploring the future of artificial intelligence with practical demonstrations and industry insights.</p>
+                        <div class="album-meta">
+                            <span><i class="fas fa-calendar-alt"></i> Sep 2024</span>
+                            <span><i class="fas fa-images"></i> 28 photos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="album-card">
+                    <div class="album-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">Annual General Meeting</h3>
+                        <p class="album-description">Community gathering featuring achievements, planning sessions, and networking opportunities.</p>
+                        <div class="album-meta">
+                            <span><i class="fas fa-calendar-alt"></i> Aug 2024</span>
+                            <span><i class="fas fa-images"></i> 35 photos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="album-card">
+                    <div class="album-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">Freshers Orientation</h3>
+                        <p class="album-description">Welcoming new members to the programming community with introductory sessions and team building activities.</p>
+                        <div class="album-meta">
+                            <span><i class="fas fa-calendar-alt"></i> Jul 2024</span>
+                            <span><i class="fas fa-images"></i> 42 photos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Videos Section -->
+        <h2 class="section-title" style="margin-top: 80px;">Featured Videos</h2>
+        <p class="section-subtitle">Watch highlights from our events and educational content</p>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="video-card">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Programming Workshop Highlights" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 class="video-title">
+                            <i class="fab fa-youtube" style="color: #ff0000; margin-right: 10px;"></i>
+                            Workshop Highlights
+                        </h3>
+                        <p class="video-description">A compilation of the best moments from our recent web development workshop, featuring student projects and expert demonstrations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="video-card">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Contest Winners Interview" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 class="video-title">
+                            <i class="fab fa-youtube" style="color: #ff0000; margin-right: 10px;"></i>
+                            Contest Champions
+                        </h3>
+                        <p class="video-description">Interviews with our monthly programming contest winners, sharing their strategies, challenges, and future goals in competitive programming.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mt-5">
+            <div style="background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(102, 126, 234, 0.1) 100%); backdrop-filter: blur(15px); border: 1px solid rgba(102, 126, 234, 0.3); border-radius: 20px; padding: 40px; display: inline-block;">
+                <h3 style="color: #fff; margin-bottom: 20px;">Want to be part of our story?</h3>
+                <p style="color: #ccc; margin-bottom: 30px;">Join DIU CPC and create memories that will be featured in our gallery!</p>
+                <a href="contact.html" class="btn" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); border: none; border-radius: 30px; color: #fff; padding: 15px 40px; font-size: 1.1rem; font-weight: 600; text-decoration: none; display: inline-block;">
+                    <i class="fas fa-user-plus" style="margin-right: 10px;"></i>
+                    Join Our Community
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%); color: #fff; text-align: center; padding: 30px 0; border-top: 1px solid rgba(135, 206, 235, 0.3);">
+        <div class="container">
+            <p style="margin: 0; font-size: 1rem;">
+                <i class="fas fa-code" style="color: #87CEEB; margin-right: 10px;"></i>
+                &copy; 2025 DIU CPC. All rights reserved.
+            </p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

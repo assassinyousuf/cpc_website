@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  min-height: 100vh;
+  color: #fff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Shimmer animation for borders */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Hover effects for cards */
+.contact-form-card:hover,
+.contact-info-card:hover,
+.social-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.social-card:hover {
+  border-color: rgba(245, 101, 101, 0.6);
+}
+
+/* Button hover effects */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(135, 206, 235, 0.5) !important;
+}
+
+/* Form input focus effects */
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #87CEEB !important;
+  box-shadow: 0 0 0 0.2rem rgba(135, 206, 235, 0.25) !important;
+  color: #fff !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-form-card,
+  .social-card {
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 2rem !important;
+  }
+}
