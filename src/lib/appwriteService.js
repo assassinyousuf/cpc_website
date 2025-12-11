@@ -2,10 +2,10 @@ import { ID, Query } from "appwrite";
 import { account, databases, storage } from "./appwrite";
 
 // Database and Collection IDs
-export const DATABASE_ID = "cpc_database";
+export const DATABASE_ID = "69303fc5000e950060b7"; // diucpc_database
 export const COLLECTIONS = {
   USERS: "users",
-  MEMBERS_REGISTRY: "members_registry",
+  MEMBERS_REGISTRY: "cpc_members",
   BLOOD_DONATIONS: "blood_donations",
   BLOOD_REQUESTS: "blood_requests",
   LOST_FOUND: "lost_found",

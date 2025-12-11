@@ -19,7 +19,7 @@ import { Client, Databases, Storage, Permission, Role } from 'node-appwrite';
 const APPWRITE_ENDPOINT = process.env.APPWRITE_ENDPOINT || 'https://sgp.cloud.appwrite.io/v1';
 const APPWRITE_PROJECT_ID = process.env.APPWRITE_PROJECT_ID || '69303565001d01148c0f';
 const APPWRITE_API_KEY = process.env.APPWRITE_API_KEY || ''; // You need to set this!
-const DATABASE_ID = 'cpc_database';
+const DATABASE_ID = '69303fc5000e950060b7'; // diucpc_database
 // =========================================
 
 // Check if manual mode
@@ -59,7 +59,7 @@ async function createMembersRegistry() {
   try {
     const collection = await databases.createCollection(
       DATABASE_ID,
-      'members_registry',
+      'cpc_members',
       'Members Registry',
       [
         Permission.read(Role.any()),
@@ -93,7 +93,7 @@ async function createMembersRegistry() {
     
     for (const attr of attributes) {
       try {
-        await databases.createStringAttribute(DATABASE_ID, 'members_registry', attr.key, attr.size, attr.required, attr.default, attr.array);
+        await databases.createStringAttribute(DATABASE_ID, 'cpc_members', attr.key, attr.size, attr.required, attr.default, attr.array);
         console.log(`  ✓ ${attr.key}`);
         await sleep(1000); // Wait for attribute to be available
       } catch (error) {
@@ -106,22 +106,22 @@ async function createMembersRegistry() {
     await sleep(2000);
     
     try {
-      await databases.createIndex(DATABASE_ID, 'members_registry', 'email_unique', 'unique', ['email']);
+      await databases.createIndex(DATABASE_ID, 'cpc_members', 'email_unique', 'unique', ['email']);
       console.log('  ✓ email_unique');
     } catch (e) { console.log('  ⚠ email_unique:', e.message); }
     
     try {
-      await databases.createIndex(DATABASE_ID, 'members_registry', 'phone_idx', 'key', ['phone']);
+      await databases.createIndex(DATABASE_ID, 'cpc_members', 'phone_idx', 'key', ['phone']);
       console.log('  ✓ phone_idx');
     } catch (e) { console.log('  ⚠ phone_idx:', e.message); }
     
     try {
-      await databases.createIndex(DATABASE_ID, 'members_registry', 'memberId_idx', 'key', ['memberId']);
+      await databases.createIndex(DATABASE_ID, 'cpc_members', 'memberId_idx', 'key', ['memberId']);
       console.log('  ✓ memberId_idx');
     } catch (e) { console.log('  ⚠ memberId_idx:', e.message); }
     
     try {
-      await databases.createIndex(DATABASE_ID, 'members_registry', 'batch_idx', 'key', ['batch']);
+      await databases.createIndex(DATABASE_ID, 'cpc_members', 'batch_idx', 'key', ['batch']);
       console.log('  ✓ batch_idx');
     } catch (e) { console.log('  ⚠ batch_idx:', e.message); }
     
@@ -474,3 +474,4 @@ async function main() {
 }
 
 main();
+
