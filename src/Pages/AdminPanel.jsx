@@ -30,7 +30,7 @@ const AdminPanel = () => {
 
   // Hardcoded admin credentials
   const ADMIN_USER = 'admin';
-  const ADMIN_PASS = 'onecircle2025';
+  const ADMIN_PASS = 'cpc2025';
   const [memberList, setMemberList] = useState(members);
   const [eventList, setEventList] = useState(events);
   const [announcementList, setAnnouncementList] = useState(announcements);
@@ -87,118 +87,142 @@ const AdminPanel = () => {
   }
 
   return (
-    <div style={{ maxWidth: 1100, margin: '40px auto', padding: 32, fontFamily: 'Segoe UI, sans-serif' }}>
-      <h2 style={{ color: '#6366f1', fontWeight: 700, fontSize: 32, marginBottom: 24 }}>Admin Dashboard</h2>
-      {/* Dashboard Overview */}
-      <div style={{ display: 'flex', gap: 32, marginBottom: 32 }}>
-        <div style={{ background: '#e0e7ff', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
-          <div style={{ fontSize: 22, fontWeight: 600, color: '#3730a3' }}>Members</div>
-          <div style={{ fontSize: 32, fontWeight: 700 }}>{stats.members}</div>
-        </div>
-        <div style={{ background: '#fef9c3', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
-          <div style={{ fontSize: 22, fontWeight: 600, color: '#92400e' }}>Events</div>
-          <div style={{ fontSize: 32, fontWeight: 700 }}>{stats.events}</div>
-        </div>
-        <div style={{ background: '#bbf7d0', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
-          <div style={{ fontSize: 22, fontWeight: 600, color: '#166534' }}>Upcoming</div>
-          <div style={{ fontSize: 32, fontWeight: 700 }}>{stats.upcoming}</div>
-        </div>
-      </div>
-
-      {/* Member Management */}
-      <div style={{ marginBottom: 32 }}>
-        <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Member Management</h3>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 12 }}>
-          <thead>
-            <tr style={{ background: '#f3f4f6' }}>
-              <th style={{ padding: 8 }}>Name</th>
-              <th style={{ padding: 8 }}>Email</th>
-              <th style={{ padding: 8 }}>Status</th>
-              <th style={{ padding: 8 }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {memberList.map(m => (
-              <tr key={m.id} style={{ background: m.status === 'Suspended' ? '#fee2e2' : m.status === 'Active' ? '#bbf7d0' : '#fef9c3' }}>
-                <td style={{ padding: 8 }}>{m.name}</td>
-                <td style={{ padding: 8 }}>{m.email}</td>
-                <td style={{ padding: 8 }}>{m.status}</td>
-                <td style={{ padding: 8 }}>
-                  <button onClick={() => updateMemberStatus(m.id, 'Active')} style={{ marginRight: 8, background: '#bbf7d0', color: '#166534', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Approve</button>
-                  <button onClick={() => updateMemberStatus(m.id, 'Suspended')} style={{ marginRight: 8, background: '#fee2e2', color: '#991b1b', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Suspend</button>
-                  <button onClick={() => updateMemberStatus(m.id, 'Rejected')} style={{ background: '#fef9c3', color: '#92400e', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Reject</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Event Management */}
-      <div style={{ marginBottom: 32 }}>
-        <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Event Management</h3>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 12 }}>
-          <thead>
-            <tr style={{ background: '#f3f4f6' }}>
-              <th style={{ padding: 8 }}>Event</th>
-              <th style={{ padding: 8 }}>Date</th>
-              <th style={{ padding: 8 }}>Registrations</th>
-              <th style={{ padding: 8 }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventList.map(e => (
-              <tr key={e.id}>
-                <td style={{ padding: 8 }}>{e.name}</td>
-                <td style={{ padding: 8 }}>{e.date}</td>
-                <td style={{ padding: 8 }}>{e.registrations}</td>
-                <td style={{ padding: 8 }}>
-                  <button onClick={() => updateEvent(e.id, e.name + ' (Updated)', e.date)} style={{ marginRight: 8, background: '#e0e7ff', color: '#3730a3', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Update</button>
-                  <button onClick={() => cancelEvent(e.id)} style={{ background: '#fee2e2', color: '#991b1b', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Cancel</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div style={{ marginTop: 16 }}>
-          <input type="text" placeholder="Event Name" id="eventName" style={{ marginRight: 8, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
-          <input type="date" id="eventDate" style={{ marginRight: 8, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
-          <button onClick={() => {
-            const name = document.getElementById('eventName').value;
-            const date = document.getElementById('eventDate').value;
-            if (name && date) addEvent(name, date);
-          }} style={{ background: 'linear-gradient(90deg, #6366f1 0%, #60a5fa 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 20px', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>Create Event</button>
-        </div>
-      </div>
-
-      {/* Announcement Management */}
-      <div style={{ marginBottom: 32 }}>
-        <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Announcement Management</h3>
-        <form onSubmit={scheduleAnnouncement} style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
-          <input type="text" placeholder="Announcement Message" value={newAnnouncement.message} onChange={e => setNewAnnouncement({ ...newAnnouncement, message: e.target.value })} style={{ flex: 2, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
-          <input type="date" value={newAnnouncement.scheduled} onChange={e => setNewAnnouncement({ ...newAnnouncement, scheduled: e.target.value })} style={{ flex: 1, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
-          <button type="submit" style={{ background: 'linear-gradient(90deg, #6366f1 0%, #60a5fa 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 20px', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>Schedule</button>
-        </form>
-        <ul>
-          {announcementList.map(a => (
-            <li key={a.id} style={{ marginBottom: 8, background: '#f3f4f6', borderRadius: 8, padding: 12 }}>
-              <strong>{a.message}</strong> <span style={{ color: '#6366f1', marginLeft: 8 }}>({a.scheduled})</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Analytics */}
-      <div style={{ marginBottom: 32 }}>
-        <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Analytics</h3>
-        <div style={{ display: 'flex', gap: 32 }}>
-          <div style={{ background: '#e0e7ff', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: 22, fontWeight: 600, color: '#3730a3' }}>User Engagement</div>
-            <div style={{ fontSize: 32, fontWeight: 700 }}>{analytics.engagement}%</div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white py-10">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div style={{ padding: 32, fontFamily: 'Segoe UI, sans-serif' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+            <h2 style={{ color: '#6366f1', fontWeight: 700, fontSize: 32 }}>Admin Dashboard</h2>
+            <a 
+              href="/admin/import-members" 
+              style={{ 
+                background: 'linear-gradient(90deg, #6366f1 0%, #60a5fa 100%)', 
+                color: '#fff', 
+                textDecoration: 'none',
+                border: 'none', 
+                borderRadius: 8, 
+                padding: '12px 24px', 
+                fontWeight: 600, 
+                fontSize: 14, 
+                cursor: 'pointer',
+                display: 'inline-block'
+              }}
+            >
+              📥 Import Members
+            </a>
           </div>
-          <div style={{ background: '#bbf7d0', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: 22, fontWeight: 600, color: '#166534' }}>Event Participation</div>
-            <div style={{ fontSize: 32, fontWeight: 700 }}>{analytics.participation}%</div>
+          
+          {/* Dashboard Overview */}
+          <div style={{ display: 'flex', gap: 32, marginBottom: 32 }}>
+            <div style={{ background: '#e0e7ff', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
+              <div style={{ fontSize: 22, fontWeight: 600, color: '#3730a3' }}>Members</div>
+              <div style={{ fontSize: 32, fontWeight: 700 }}>{stats.members}</div>
+            </div>
+            <div style={{ background: '#fef9c3', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
+              <div style={{ fontSize: 22, fontWeight: 600, color: '#92400e' }}>Events</div>
+              <div style={{ fontSize: 32, fontWeight: 700 }}>{stats.events}</div>
+            </div>
+            <div style={{ background: '#bbf7d0', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
+              <div style={{ fontSize: 22, fontWeight: 600, color: '#166534' }}>Upcoming</div>
+              <div style={{ fontSize: 32, fontWeight: 700 }}>{stats.upcoming}</div>
+            </div>
+              </div>
+
+          {/* Member Management */}
+          <div style={{ marginBottom: 32 }}>
+            <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Member Management</h3>
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 12 }}>
+              <thead>
+                <tr style={{ background: '#f3f4f6' }}>
+                  <th style={{ padding: 8 }}>Name</th>
+                  <th style={{ padding: 8 }}>Email</th>
+                  <th style={{ padding: 8 }}>Status</th>
+                  <th style={{ padding: 8 }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {memberList.map(m => (
+                  <tr key={m.id} style={{ background: m.status === 'Suspended' ? '#fee2e2' : m.status === 'Active' ? '#bbf7d0' : '#fef9c3' }}>
+                    <td style={{ padding: 8 }}>{m.name}</td>
+                    <td style={{ padding: 8 }}>{m.email}</td>
+                    <td style={{ padding: 8 }}>{m.status}</td>
+                    <td style={{ padding: 8 }}>
+                      <button onClick={() => updateMemberStatus(m.id, 'Active')} style={{ marginRight: 8, background: '#bbf7d0', color: '#166534', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Approve</button>
+                      <button onClick={() => updateMemberStatus(m.id, 'Suspended')} style={{ marginRight: 8, background: '#fee2e2', color: '#991b1b', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Suspend</button>
+                      <button onClick={() => updateMemberStatus(m.id, 'Rejected')} style={{ background: '#fef9c3', color: '#92400e', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Reject</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+              </div>
+
+          {/* Event Management */}
+          <div style={{ marginBottom: 32 }}>
+            <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Event Management</h3>
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 12 }}>
+              <thead>
+                <tr style={{ background: '#f3f4f6' }}>
+                  <th style={{ padding: 8 }}>Event</th>
+                  <th style={{ padding: 8 }}>Date</th>
+                  <th style={{ padding: 8 }}>Registrations</th>
+                  <th style={{ padding: 8 }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {eventList.map(e => (
+                  <tr key={e.id}>
+                    <td style={{ padding: 8 }}>{e.name}</td>
+                    <td style={{ padding: 8 }}>{e.date}</td>
+                    <td style={{ padding: 8 }}>{e.registrations}</td>
+                    <td style={{ padding: 8 }}>
+                      <button onClick={() => updateEvent(e.id, e.name + ' (Updated)', e.date)} style={{ marginRight: 8, background: '#e0e7ff', color: '#3730a3', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Update</button>
+                      <button onClick={() => cancelEvent(e.id)} style={{ background: '#fee2e2', color: '#991b1b', border: 'none', borderRadius: 6, padding: '4px 12px', cursor: 'pointer' }}>Cancel</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div style={{ marginTop: 16 }}>
+              <input type="text" placeholder="Event Name" id="eventName" style={{ marginRight: 8, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
+              <input type="date" id="eventDate" style={{ marginRight: 8, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
+              <button onClick={() => {
+                const name = document.getElementById('eventName').value;
+                const date = document.getElementById('eventDate').value;
+                if (name && date) addEvent(name, date);
+              }} style={{ background: 'linear-gradient(90deg, #6366f1 0%, #60a5fa 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 20px', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>Create Event</button>
+            </div>
+          </div>
+
+          {/* Announcement Management */}
+          <div style={{ marginBottom: 32 }}>
+            <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Announcement Management</h3>
+            <form onSubmit={scheduleAnnouncement} style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+              <input type="text" placeholder="Announcement Message" value={newAnnouncement.message} onChange={e => setNewAnnouncement({ ...newAnnouncement, message: e.target.value })} style={{ flex: 2, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
+              <input type="date" value={newAnnouncement.scheduled} onChange={e => setNewAnnouncement({ ...newAnnouncement, scheduled: e.target.value })} style={{ flex: 1, padding: 8, borderRadius: 6, border: '1px solid #6366f1' }} />
+              <button type="submit" style={{ background: 'linear-gradient(90deg, #6366f1 0%, #60a5fa 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 20px', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>Schedule</button>
+            </form>
+            <ul>
+              {announcementList.map(a => (
+                <li key={a.id} style={{ marginBottom: 8, background: '#f3f4f6', borderRadius: 8, padding: 12 }}>
+                  <strong>{a.message}</strong> <span style={{ color: '#6366f1', marginLeft: 8 }}>({a.scheduled})</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Analytics */}
+          <div style={{ marginBottom: 32 }}>
+            <h3 style={{ color: '#6366f1', fontWeight: 700, fontSize: 24 }}>Analytics</h3>
+            <div style={{ display: 'flex', gap: 32 }}>
+              <div style={{ background: '#e0e7ff', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
+                <div style={{ fontSize: 22, fontWeight: 600, color: '#3730a3' }}>User Engagement</div>
+                <div style={{ fontSize: 32, fontWeight: 700 }}>{analytics.engagement}%</div>
+              </div>
+              <div style={{ background: '#bbf7d0', borderRadius: 16, padding: 24, flex: 1, textAlign: 'center' }}>
+                <div style={{ fontSize: 22, fontWeight: 600, color: '#166534' }}>Event Participation</div>
+                <div style={{ fontSize: 32, fontWeight: 700 }}>{analytics.participation}%</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
-# 📢 DIU CPC Online Platform - oneCircle
+# 📢 CPC Online Platform - Computer Programming Club
 
 ## 📌 About the Project
-The *DIU CPC Online Platform* is an all-in-one digital hub designed to connect, engage, and empower members of the *Dhaka International University Computer Programming Club (DIU CPC)*.
+The *CPC Online Platform* is an all-in-one digital hub designed to connect, engage, and empower members of the *Computer Programming Club (CPC)*.
 
 Our platform bridges the gap between students and the club’s activities by providing a *centralized, user-friendly, and secure* space for:
 - Membership management

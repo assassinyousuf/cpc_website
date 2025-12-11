@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { authService } from '../lib/appwriteService';
 
 const AuthContext = createContext();
 
@@ -9,98 +10,80 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check for existing authentication on app load
+  // Check authentication status on mount
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    const userData = localStorage.getItem('userData');
-    
-    if (token && userData) {
-      try {
-        const parsedUser = JSON.parse(userData);
-        setUser(parsedUser);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('userData');
-      }
-    }
-    setLoading(false);
+    checkAuth();
   }, []);
+
+  const checkAuth = async () => {
+    try {
+      const currentUser = await authService.getCurrentUser();
+      if (currentUser) {
+        setUser({
+          ...currentUser,
+          avatar: currentUser.avatar || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
+        });
+        setIsAuthenticated(true);
+      } else {
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    } catch (error) {
+      console.error('Auth check error:', error);
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const login = async (credentials) => {
     try {
-      // Mock API call - replace with your actual API
-      // In a real app, you'd make an API call here
-      if (credentials.email && credentials.password) {
-        // Check if user is the bulletin admin
-        const isBulletinAdmin = credentials.email === 'admin@bulletin.com' && credentials.password === 'admin123';
-        
-        const mockUser = {
-          id: 1,
-          name: credentials.name || (isBulletinAdmin ? 'Bulletin Admin' : 'User'),
-          email: credentials.email,
-          studentId: credentials.studentId || (isBulletinAdmin ? 'ADMIN001' : 'STU001'),
-          avatar: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
-          role: isBulletinAdmin ? 'bulletin_admin' : 'student',
-          permissions: isBulletinAdmin ? ['manage_bulletins', 'create_bulletins', 'delete_bulletins'] : []
-        };
-        
-        const mockToken = 'mock-jwt-token-' + Date.now();
-        
-        // Store in localStorage
-        localStorage.setItem('authToken', mockToken);
-        localStorage.setItem('userData', JSON.stringify(mockUser));
-        
-        setUser(mockUser);
-        setIsAuthenticated(true);
-        
-        return { success: true, user: mockUser };
-      } else {
-        throw new Error('Invalid credentials');
-      }
+      await authService.login(credentials.email, credentials.password);
+      await checkAuth(); // Refresh user data
+      return { success: true };
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, error: error.message };
+      throw new Error(error.message || 'Failed to login');
     }
   };
 
   const register = async (userData) => {
     try {
-      // Mock registration - replace with your actual API
-      if (userData.email && userData.password && userData.name && userData.studentId) {
-        const newUser = {
-          id: Date.now(),
-          name: userData.name,
-          email: userData.email,
-          studentId: userData.studentId,
-          avatar: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
-        };
-        
-        const mockToken = 'mock-jwt-token-' + Date.now();
-        
-        // Store in localStorage
-        localStorage.setItem('authToken', mockToken);
-        localStorage.setItem('userData', JSON.stringify(newUser));
-        
-        setUser(newUser);
-        setIsAuthenticated(true);
-        
-        return { success: true, user: newUser };
-      } else {
-        throw new Error('All fields are required');
-      }
+      const result = await authService.register({
+        email: userData.email,
+        password: userData.password,
+        name: userData.name,
+        phone: userData.phoneNumber || userData.phone,
+        batch: userData.academicYear || userData.batch,
+        roll: userData.roll,
+        department: userData.department,
+        guardianPhone: userData.guardianPhone,
+        address: userData.address,
+        bloodGroup: userData.bloodGroup
+      });
+      await checkAuth(); // Refresh user data
+      return { 
+        success: true,
+        isRegistryMember: result.isRegistryMember,
+        profileComplete: result.profileComplete
+      };
     } catch (error) {
       console.error('Registration error:', error);
-      return { success: false, error: error.message };
+      throw new Error(error.message || 'Failed to register');
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userData');
-    setUser(null);
-    setIsAuthenticated(false);
+  const logout = async () => {
+    try {
+      await authService.logout();
+      setUser(null);
+      setIsAuthenticated(false);
+      return { success: true };
+    } catch (error) {
+      console.error('Logout error:', error);
+      throw new Error('Failed to logout');
+    }
   };
 
   const value = {
@@ -109,12 +92,13 @@ export default function AuthProvider({ children }) {
     loading,
     login,
     register,
-    logout
+    logout,
+    checkAuth
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

@@ -3,28 +3,93 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+/* Global Light Sky Theme Variables */
+@theme {
+  /* Primary Colors - Sky Blue */
+  --color-primary: #4682B4;
+  --color-primary-focus: #3b6fa0;
+  --color-primary-content: #ffffff;
+  
+  /* Secondary Colors - CPC Purple */
+  --color-secondary: #a855f7;
+  --color-secondary-focus: #9333ea;
+  --color-secondary-content: #ffffff;
+  
+  /* Accent Colors */
+  --color-accent: #87CEEB;
+  --color-accent-focus: #6db3db;
+  --color-accent-content: #1a1a2e;
+  
+  /* Neutral Colors for Light Mode */
+  --color-neutral: #e5e7eb;
+  --color-neutral-focus: #d1d5db;
+  --color-neutral-content: #1f2937;
+  
+  /* Base/Background Colors - Light Theme */
+  --color-base-100: #f0f9ff;
+  --color-base-200: #e0f2fe;
+  --color-base-300: #bae6fd;
+  --color-base-content: #1a1a2e;
+  
+  /* Info, Success, Warning, Error */
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+  --color-success: #10b981;
+  --color-success-content: #ffffff;
+  --color-warning: #fbbf24;
+  --color-warning-content: #000000;
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;
+}
+
+/* Global Dark Mode Styles */
+* {
+  border-color: rgba(71, 85, 105, 0.3);
+}
+
+body {
+  background: linear-gradient(to bottom right, #111827 0%, #1e3a8a 50%, #581c87 100%);
+  min-height: 100vh;
+  color: #f3f4f6;
+}
+
+#root {
+  min-height: 100vh;
+  background: transparent;
+}
+
+.container {
+  background: transparent !important;
+}
+
+/* Ensure all main content areas are transparent to show body background */
+main, section, article {
+  background: transparent;
+}
+
 .font-inter {
   font-family: "Inter", sans-serif;
 }
 
-/* Color Variables */
-/* Indigo Blue	Trust, professionalism (main accent)	#3F51B5
-Crimson Red	Urgency, blood donation highlights	#D32F2F
-Emerald Green	Hope, health, donation success	#388E3C
-Amber Yellow	Festive, attention-grabbing (events, notices)	#FFC107
-Cool Gray	Neutral backgrounds, cards, modals	#F5F5F5 / #9E9E9E */
+/* Color Variables - CPC Dark Theme */
+/* Bright Blue (Primary)	#3b82f6 - Main brand color for dark mode
+Vibrant Purple (Secondary)	#a855f7 - Accent color 
+Crimson Red	Urgency, blood donation highlights	#ef4444
+Emerald Green	Hope, health, donation success	#10b981
+Amber Yellow	Festive, attention-grabbing (events, notices)	#fbbf24
+Dark Gray	Backgrounds, cards, modals	#1a1a2e / #16213e */
 
 .main-col {
-  color: #3f51b5;
+  color: #60a5fa;
 }
 .blood-highlight {
-  color: #d32f2f;
+  color: #ef4444;
 }
 .donation-highlight {
-  color: #388e3c;
+  color: #10b981;
 }
 .attention-grabbing {
-  color: #ffc107;
+  color: #fbbf24;
 }
 
 /* Custom Utilities */
@@ -61,17 +126,115 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #1f2937;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: #3b82f6;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #60a5fa;
+}
+
+/* Dark Mode Form Elements */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  background-color: rgba(31, 41, 55, 0.8) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  color: #f3f4f6 !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+  background-color: rgba(31, 41, 55, 0.9) !important;
+  border-color: #3b82f6 !important;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Dark Mode Labels */
+label {
+  color: #f3f4f6 !important;
+}
+
+.label-text {
+  color: #f3f4f6 !important;
+}
+
+/* Dark Mode Cards */
+.card {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(135, 206, 235, 0.1) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(135, 206, 235, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Dark Mode Modals */
+.modal-box {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(59, 130, 246, 0.1) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #f3f4f6 !important;
+}
+
+/* Dark Mode Dropdowns */
+.dropdown-content {
+  background: rgba(31, 41, 55, 0.95) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+/* Dark Mode Tables */
+table {
+  color: #f3f4f6;
+}
+
+th {
+  background-color: #f8f9fa !important;
+  color: #1a1a2e !important;
+}
+
+td {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #1a1a2e !important;
+  border-color: rgba(135, 206, 235, 0.3) !important;
+}
+
+/* Light Mode Alerts */
+.alert {
+  border: 1px solid rgba(135, 206, 235, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Light Mode Badges */
+.badge {
+  border-color: rgba(135, 206, 235, 0.3);
+}
+
+/* Light Mode Buttons */
+.btn {
+  font-weight: 600;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(135, 206, 235, 0.2);
+}
+
+.btn-outline {
+  border-width: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
 }
 
 /* Loading animation */
@@ -293,6 +456,25 @@ html {
   50% {
     transform: translateY(-3px) rotate(0deg);
   }
+}
+
+/* News Ticker Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  display: inline-block;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 @keyframes statsGlow {

@@ -87,7 +87,8 @@ const MedicalAid = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div className="container mx-auto px-4 py-8 font-inter">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-4">
@@ -170,7 +171,7 @@ const MedicalAid = () => {
 
           <div className="space-y-6">
             {medicalCases.map((case_) => (
-              <div key={case_.id} className={`card bg-white shadow-lg border-l-4 ${getUrgencyBgColor(case_.urgency)}`}>
+              <div key={case_.id} className={`card bg-gray-800/50 border shadow-lg ${getUrgencyBgColor(case_.urgency)}`}>
                 <div className="card-body">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex-1">
@@ -183,7 +184,7 @@ const MedicalAid = () => {
                       <p className="text-sm text-gray-600 mb-2">
                         Student ID: {case_.studentId} | {case_.condition}
                       </p>
-                      <p className="text-gray-700 mb-3">{case_.description}</p>
+                      <p className="text-gray-300 mb-3">{case_.description}</p>
                       <div className="flex gap-4 text-sm text-gray-600">
                         <span>🏥 {case_.hospital}</span>
                         <span>⏰ {case_.daysLeft} days left</span>
@@ -546,6 +547,7 @@ const MedicalAid = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

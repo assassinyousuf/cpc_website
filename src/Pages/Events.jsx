@@ -192,7 +192,8 @@ const Events = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div className="container mx-auto px-4 py-8 font-inter">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-4">
@@ -287,7 +288,7 @@ const Events = () => {
       {activeTab === "upcoming" && (
         <div className="grid lg:grid-cols-2 gap-6">
           {getFilteredEvents(upcomingEvents).map((event) => (
-            <div key={event.id} className="card bg-white shadow-lg hover:shadow-xl transition-shadow">
+            <div key={event.id} className="card bg-gray-800/50 border border-blue-500/30 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 transition-shadow">
               <div className="card-body">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
@@ -310,9 +311,9 @@ const Events = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-600 mb-4 line-clamp-3">{event.description}</p>
+                <p className="text-gray-300 mb-4 line-clamp-3">{event.description}</p>
 
-                <div className="space-y-2 text-sm text-gray-600 mb-4">
+                <div className="space-y-2 text-sm text-gray-300 mb-4">
                   <div className="flex items-center gap-2">
                     <span>📅</span>
                     <span>{formatDate(event.date)} at {event.time}</span>
@@ -396,7 +397,7 @@ const Events = () => {
 
       {/* Calendar View */}
       {activeTab === "calendar" && (
-        <div className="card bg-white shadow-lg">
+        <div className="card bg-gray-800/50 border border-purple-500/30 shadow-lg">
           <div className="card-body">
             <h3 className="card-title mb-4">Event Calendar</h3>
             <div className="grid grid-cols-7 gap-2 mb-4">
@@ -420,7 +421,7 @@ const Events = () => {
                   <div 
                     key={i} 
                     className={`p-3 min-h-[60px] border rounded ${
-                      day > 0 && day <= 31 ? 'bg-white hover:bg-gray-50 cursor-pointer' : 'bg-gray-100'
+                      day > 0 && day <= 31 ? 'bg-gray-700 hover:bg-gray-600 cursor-pointer border border-gray-600' : 'bg-gray-900'
                     } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
                   >
                     {day > 0 && day <= 31 && (
@@ -559,7 +560,7 @@ const Events = () => {
       {/* Archive Modal */}
       {archiveEventId && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-lg w-full relative">
+          <div className="bg-gray-800 border border-blue-500/30 rounded-xl shadow-lg p-8 max-w-lg w-full relative">
             <button className="absolute top-2 right-2 btn btn-sm btn-circle btn-error" onClick={() => setArchiveEventId(null)}>&times;</button>
             <h3 className="text-xl font-bold mb-4">Event Archive</h3>
             <div className="mb-4">
@@ -583,6 +584,7 @@ const Events = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

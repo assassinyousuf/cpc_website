@@ -12,11 +12,16 @@ import BulletinDashboard from "../Pages/BulletinDashboard";
 import Contact from "../Pages/Contact";
 import Events from "../Pages/Events";
 import FloodRelief from "../Pages/FloodRelief";
+import Gallery from "../Pages/Gallery";
 import Home from "../Pages/Home";
 import JobVacancy from "../Pages/JobVacancy";
 import LostFound from "../Pages/LostFound";
 import MedicalAid from "../Pages/MedicalAid";
 import Profile from "../Pages/Profile";
+import ProfileNew from "../Pages/ProfileNew";
+import AdminImportMembers from "../Pages/AdminImportMembers";
+import Resources from "../Pages/Resources";
+import Team from "../Pages/Team";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +44,22 @@ export const router = createBrowserRouter([
         {
             path: "/about",
             element: <About/>
+        },
+        {
+            path: "/gallery",
+            element: <Gallery/>
+        },
+        {
+            path: "/team",
+            element: <Team/>
+        },
+        {
+            path: "/resources",
+            element: <Resources/>
+        },
+        {
+            path: "/contact",
+            element: <Contact/>
         },
         // Special bulletin dashboard route (admin only)
         {
@@ -76,6 +97,10 @@ export const router = createBrowserRouter([
         },
         {
             path: "/profile",
+            element: <ProtectedRoute><ProfileNew/></ProtectedRoute>
+        },
+        {
+            path: "/profile-old",
             element: <ProtectedRoute><Profile/></ProtectedRoute>
         },
         {
@@ -83,12 +108,12 @@ export const router = createBrowserRouter([
             element: <ProtectedRoute><JobVacancy/></ProtectedRoute>
         },
         {
-            path: "/contact",
-            element: <Contact/>
-        },
-        {
             path: "/admin-panel",
             element: <AdminPanel/>
+        },
+        {
+            path: "/admin/import-members",
+            element: <ProtectedRoute><AdminImportMembers/></ProtectedRoute>
         }
     ]
   },

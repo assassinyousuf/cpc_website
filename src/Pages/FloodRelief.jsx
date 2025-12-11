@@ -84,7 +84,8 @@ const FloodRelief = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div className="container mx-auto px-4 py-8 font-inter">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-4">
@@ -360,7 +361,7 @@ const FloodRelief = () => {
       {activeTab === "campaigns" && (
         <div className="space-y-6">
           {reliefCampaigns.map((campaign) => (
-            <div key={campaign.id} className="card bg-white shadow-lg">
+            <div key={campaign.id} className="card bg-gray-800/50 border border-blue-500/30 shadow-lg">
               <div className="card-body">
                 <div className="flex items-start gap-6">
                   <div className="text-6xl">{campaign.image}</div>
@@ -494,6 +495,7 @@ const FloodRelief = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

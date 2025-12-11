@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { lostFoundService } from "../lib/appwriteService";
+import { useAuth } from "../hooks/useAuth";
 
 const LostFound = () => {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("lost");
+  const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
-    type: "lost", // lost or found
+    type: "lost",
     itemName: "",
     category: "",
     description: "",
@@ -150,7 +158,8 @@ const LostFound = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div className="container mx-auto px-4 py-8 font-inter">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-4">
@@ -193,7 +202,7 @@ const LostFound = () => {
       </div>
 
       {/* Report Form */}
-      <div className="card bg-white shadow-lg mb-8">
+      <div className="card bg-gray-800/50 border border-blue-500/30 shadow-lg mb-8">
         <div className="card-body">
           <h3 className="card-title text-blue-600 mb-4">Report Lost or Found Item</h3>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -495,6 +504,7 @@ const LostFound = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

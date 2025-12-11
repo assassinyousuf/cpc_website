@@ -62,48 +62,77 @@ export default function Home() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <div className="container mx-auto px-4 py-4 font-inter">
       {/* Enhanced Hero Section */}
-      <div className="hero min-h-[70vh] bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 rounded-xl mb-12 relative overflow-hidden p-10">
+      <div className="hero min-h-[70vh] bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 rounded-xl mb-12 relative z-10 p-10 border border-blue-500/20">
+        {/* Floating Programming Icons */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <i className="fab fa-python absolute top-10 left-[10%] text-5xl text-blue-600 animate-float" style={{animationDelay: '0s'}}></i>
+          <i className="fab fa-js absolute top-20 right-[15%] text-4xl text-yellow-500 animate-bounce" style={{animationDelay: '0.5s'}}></i>
+          <i className="fab fa-java absolute top-[40%] left-[5%] text-5xl text-red-600 animate-float" style={{animationDelay: '1s'}}></i>
+          <i className="fas fa-code absolute bottom-[30%] right-[10%] text-6xl text-purple-600 animate-pulse" style={{animationDelay: '0.3s'}}></i>
+          <i className="fab fa-react absolute bottom-[20%] left-[15%] text-5xl text-cyan-500 animate-spin" style={{animationDuration: '10s'}}></i>
+          <i className="fab fa-node-js absolute top-[50%] right-[20%] text-4xl text-green-600 animate-bounce" style={{animationDelay: '1.5s'}}></i>
+          <i className="fab fa-html5 absolute bottom-[40%] left-[25%] text-5xl text-orange-600 animate-float" style={{animationDelay: '2s'}}></i>
+        </div>
+        
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-20 h-20 bg-blue-400 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute top-32 right-20 w-16 h-16 bg-purple-400 rounded-full blur-lg animate-bounce"></div>
-          <div className="absolute bottom-20 left-32 w-24 h-24 bg-indigo-400 rounded-full blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-32 right-10 w-12 h-12 bg-pink-400 rounded-full blur-md animate-bounce delay-500"></div>
+          <div className="absolute bottom-20 left-32 w-24 h-24 bg-blue-600 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-32 right-10 w-12 h-12 bg-purple-500 rounded-full blur-md animate-bounce delay-500"></div>
         </div>
 
         <div className="hero-content text-center relative z-10">
           <div className="max-w-4xl">
             {/* Badge */}
             <div className="inline-block mb-6 animate-fadeIn">
-              <div className="badge badge-lg bg-white/20 backdrop-blur-sm text-blue-800 border-blue-200 p-3">
-                🎓 University Community Platform
+              <div className="badge badge-lg bg-blue-500/20 backdrop-blur-sm text-blue-300 border-blue-400/50 p-3">
+                🎓 DIU Computer Programming Club
               </div>
             </div>
 
             {/* Main Title with Animation */}
             <h1 className="text-6xl md:text-7xl font-bold mb-6 animate-slideUp">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                one
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent">
+                CPC
               </span>
-              <span className="text-gray-800">Circle</span>
             </h1>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-gray-200">
+              Computer Programming Club
+            </h2>
+
+            {/* News Ticker */}
+            <div className="mb-6 bg-gradient-to-r from-blue-900/80 to-purple-900/80 backdrop-blur-sm text-white px-6 py-3 rounded-lg shadow-lg animate-fadeIn delay-300">
+              <div className="flex items-center gap-3">
+                <span className="text-yellow-400 font-bold flex-shrink-0">📢 Latest:</span>
+                <div className="overflow-hidden flex-1">
+                  <div className="animate-marquee whitespace-nowrap">
+                    <span className="inline-block px-4">🚀 December 2024 Monthly Contest - Register Now!</span>
+                    <span className="inline-block px-4">🏆 NASA Space Apps Challenge - CPC Teams Won Champions!</span>
+                    <span className="inline-block px-4">🎪 Fall Fest 2024 - CPC Sponsored Events</span>
+                    <span className="inline-block px-4">🌐 Web Development Workshop - May 21, 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Subtitle with Typing Effect Style */}
-            <div className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed animate-fadeIn delay-300">
+            <div className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed animate-fadeIn delay-300">
               <p className="mb-2">Connecting university communities through</p>
               <div className="flex flex-wrap justify-center gap-2 text-lg">
-                <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
+                <span className="bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full border border-yellow-500/30">
                   🎉 Events
                 </span>
-                <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                <span className="bg-red-900/50 text-red-300 px-3 py-1 rounded-full border border-red-500/30">
                   🩸 Blood Donation
                 </span>
-                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                <span className="bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full border border-blue-500/30">
                   🔍 Lost & Found
                 </span>
-                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                <span className="bg-green-900/50 text-green-300 px-3 py-1 rounded-full border border-green-500/30">
                   🌊 Relief Aid
                 </span>
               </div>
@@ -111,21 +140,21 @@ export default function Home() {
 
             {/* Interactive Stats Preview */}
             <div className="flex flex-wrap justify-center gap-4 mb-8 animate-fadeIn delay-500">
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="text-2xl font-bold text-red-600">450+</div>
-                <div className="text-sm text-gray-600">Lives Saved</div>
+              <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 border border-blue-500/30">
+                <div className="text-2xl font-bold text-red-400">450+</div>
+                <div className="text-sm text-gray-300">Lives Saved</div>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="text-2xl font-bold text-green-600">৳6L+</div>
-                <div className="text-sm text-gray-600">Funds Raised</div>
+              <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 border border-blue-500/30">
+                <div className="text-2xl font-bold text-green-400">৳6L+</div>
+                <div className="text-sm text-gray-300">Funds Raised</div>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="text-2xl font-bold text-blue-600">2,500+</div>
-                <div className="text-sm text-gray-600">Active Users</div>
+              <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 border border-blue-500/30">
+                <div className="text-2xl font-bold text-blue-400">2,500+</div>
+                <div className="text-sm text-gray-300">Active Users</div>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="text-2xl font-bold text-purple-600">95%</div>
-                <div className="text-sm text-gray-600">Satisfaction</div>
+              <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 border border-blue-500/30">
+                <div className="text-2xl font-bold text-purple-400">95%</div>
+                <div className="text-sm text-gray-300">Satisfaction</div>
               </div>
             </div>
 
@@ -166,7 +195,7 @@ export default function Home() {
 
               <Link
                 to="/about"
-                className="btn btn-lg bg-white/80 backdrop-blur-sm text-gray-700 border-2 border-gray-200 hover:bg-white hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                className="btn btn-lg bg-gray-800/80 backdrop-blur-sm text-gray-200 border-2 border-gray-600 hover:bg-gray-700 hover:shadow-lg hover:shadow-blue-500/20 transform hover:scale-105 transition-all duration-300"
               >
                 <span className="flex items-center gap-2">
                   <span>ℹ️</span>
@@ -193,12 +222,12 @@ export default function Home() {
       </div>
 
       {/* Enhanced Features Grid */}
-      <div className="mb-12">
+      <div className="mb-12 relative z-20">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 main-col animate-fadeIn">
+          <h2 className="text-4xl font-bold mb-4 text-white animate-fadeIn">
             Explore Our Features
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fadeIn delay-300">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto animate-fadeIn delay-300">
             Discover powerful tools designed to strengthen your university
             community and create lasting impact
           </p>
@@ -214,10 +243,10 @@ export default function Home() {
               <div style={{ animationDelay: `${index * 0.1}s` }}>
                 <Link to={feature.link} className="block h-full">
                   <div
-                    className={`card ${feature.bgColor} shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105 group-hover:-translate-y-2 border-2 border-transparent hover:border-white/50 relative overflow-hidden`}
+                    className="card bg-gray-800/90 backdrop-blur-sm shadow-xl shadow-blue-500/20 hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 transform group-hover:scale-105 group-hover:-translate-y-2 border-2 border-blue-500/30 hover:border-blue-400/50 relative overflow-hidden"
                   >
                     {/* Animated Background Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                     {/* Floating Icon Background */}
                     <div className="absolute -top-4 -right-4 text-6xl opacity-10 group-hover:opacity-20 group-hover:rotate-12 transition-all duration-500">
@@ -235,19 +264,19 @@ export default function Home() {
 
                       {/* Title with Gradient Effect */}
                       <h3
-                        className={`card-title text-xl font-bold mb-3 ${feature.color} group-hover:text-gray-800 transition-colors duration-300`}
+                        className="card-title text-xl font-bold mb-3 text-blue-300 group-hover:text-blue-200 transition-colors duration-300"
                       >
                         {feature.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-gray-600 text-sm leading-relaxed mb-6 group-hover:text-gray-700 transition-colors duration-300">
+                      <p className="text-gray-300 text-sm leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
                         {feature.description}
                       </p>
 
                       {/* Enhanced Action Button */}
                       <div className="card-actions justify-end mt-auto">
-                        <div className="btn btn-sm bg-white/80 backdrop-blur-sm border-2 border-gray-300 text-gray-700 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white hover:border-transparent hover:shadow-lg transform hover:scale-105 transition-all duration-300 group">
+                        <div className="btn btn-sm bg-gray-700/80 backdrop-blur-sm border-2 border-gray-600 text-gray-200 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white hover:border-transparent hover:shadow-lg transform hover:scale-105 transition-all duration-300 group">
                           <span className="flex items-center gap-2">
                             Explore
                             <svg
@@ -269,7 +298,7 @@ export default function Home() {
 
                       {/* Feature Stats/Badge */}
                       <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        <div className="badge badge-sm bg-white/90 text-gray-700 border-none font-semibold">
+                        <div className="badge badge-sm bg-gray-700/90 text-gray-200 border-none font-semibold">
                           {index === 0 && "245 Donors"}
                           {index === 1 && "89% Success"}
                           {index === 2 && "৳4.2L Raised"}
@@ -304,11 +333,11 @@ export default function Home() {
 
         <div className="text-center mb-12 relative z-10">
           <div className="inline-block mb-4">
-            <div className="badge badge-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white border-none p-4 animate-fadeIn">
+            <div className="badge badge-lg bg-gradient-to-r from-blue-800 to-purple-600 text-white border-none p-4 animate-fadeIn">
               📊 Real-time Analytics
             </div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-slideUp">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-900 via-purple-600 to-blue-700 bg-clip-text text-transparent animate-slideUp">
             Platform Statistics
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto animate-fadeIn delay-300">
@@ -320,7 +349,7 @@ export default function Home() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Blood Donation Stats */}
           <div
-            className="stats-card bg-gradient-to-br from-red-50 via-red-100 to-red-200 rounded-xl p-6 shadow-lg border border-red-200 relative overflow-hidden animate-fadeIn"
+            className="stats-card bg-gradient-to-br from-red-900/30 via-red-800/40 to-red-900/30 border border-red-500/30 rounded-xl p-6 shadow-lg shadow-red-500/20 relative overflow-hidden animate-fadeIn"
             style={{ animationDelay: "0.1s" }}
           >
             {/* Stable Glowing Effect */}
@@ -373,7 +402,7 @@ export default function Home() {
 
           {/* Lost & Found Stats */}
           <div
-            className="stats-card bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 rounded-xl p-6 shadow-lg border border-blue-200 relative overflow-hidden animate-fadeIn"
+            className="stats-card bg-gradient-to-br from-blue-900/30 via-blue-800/40 to-blue-900/30 border border-blue-500/30 rounded-xl p-6 shadow-lg shadow-blue-500/20 relative overflow-hidden animate-fadeIn"
             style={{ animationDelay: "0.2s" }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-blue-400/5 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
@@ -424,7 +453,7 @@ export default function Home() {
 
           {/* Emergency Aid Stats */}
           <div
-            className="stats-card bg-gradient-to-br from-green-50 via-green-100 to-green-200 rounded-xl p-6 shadow-lg border border-green-200 relative overflow-hidden animate-fadeIn"
+            className="stats-card bg-gradient-to-br from-green-900/30 via-green-800/40 to-green-900/30 border border-green-500/30 rounded-xl p-6 shadow-lg shadow-green-500/20 relative overflow-hidden animate-fadeIn"
             style={{ animationDelay: "0.3s" }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-green-400/5 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
@@ -471,7 +500,7 @@ export default function Home() {
 
           {/* Events Stats */}
           <div
-            className="stats-card bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-200 rounded-xl p-6 shadow-lg border border-yellow-200 relative overflow-hidden animate-fadeIn"
+            className="stats-card bg-gradient-to-br from-yellow-900/30 via-yellow-800/40 to-yellow-900/30 border border-yellow-500/30 rounded-xl p-6 shadow-lg shadow-yellow-500/20 relative overflow-hidden animate-fadeIn"
             style={{ animationDelay: "0.4s" }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-yellow-400/5 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
@@ -525,7 +554,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Marketplace Stats */}
           <div
-            className="stats-card bg-gradient-to-br from-purple-50 via-purple-100 to-purple-200 shadow-xl rounded-xl border border-purple-200 relative overflow-hidden animate-fadeIn"
+            className="stats-card bg-gradient-to-br from-purple-900/30 via-purple-800/40 to-purple-900/30 border border-purple-500/30 shadow-xl rounded-xl shadow-purple-500/20 relative overflow-hidden animate-fadeIn"
             style={{ animationDelay: "0.5s" }}
           >
             {/* Animated Background */}
@@ -762,24 +791,24 @@ export default function Home() {
 
         {/* Enhanced Overall Impact Summary */}
         <div
-          className="mt-8 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-8 shadow-xl border-2 border-indigo-200 relative overflow-hidden animate-fadeIn"
+          className="mt-8 bg-gradient-to-r from-blue-900/30 via-purple-900/30 to-blue-900/30 border border-blue-500/30 rounded-2xl p-8 shadow-xl relative overflow-hidden animate-fadeIn"
           style={{ animationDelay: "0.8s" }}
         >
           {/* Animated Background Elements */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-4 left-4 w-16 h-16 bg-indigo-400 rounded-full blur-xl animate-pulse"></div>
+            <div className="absolute top-4 left-4 w-16 h-16 bg-blue-400 rounded-full blur-xl animate-pulse"></div>
             <div className="absolute top-8 right-8 w-12 h-12 bg-purple-400 rounded-full blur-lg animate-bounce"></div>
-            <div className="absolute bottom-4 left-1/2 w-20 h-20 bg-pink-400 rounded-full blur-2xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-4 left-1/2 w-20 h-20 bg-blue-500 rounded-full blur-2xl animate-pulse delay-1000"></div>
           </div>
 
           <div className="relative z-10">
             <div className="text-center mb-8">
               <div className="inline-block mb-4">
-                <div className="badge badge-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white border-none p-4">
+                <div className="badge badge-lg bg-gradient-to-r from-blue-800 to-purple-600 text-white border-none p-4">
                   🎯 Community Impact Dashboard
                 </div>
               </div>
-              <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+              <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-900 via-purple-600 to-blue-700 bg-clip-text text-transparent mb-4">
                 Overall Community Impact
               </h3>
               <p className="text-gray-600 max-w-2xl mx-auto">
@@ -793,7 +822,7 @@ export default function Home() {
                 className="group cursor-pointer animate-fadeIn"
                 style={{ animationDelay: "0.9s" }}
               >
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-500 border border-red-200 hover:border-red-300">
+                <div className="bg-gray-800/80 backdrop-blur-sm border border-red-500/30 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:shadow-red-500/20 transform hover:scale-105 transition-all duration-500">
                   <div className="text-2xl mb-3 animate-bounce">❤️</div>
                   <div className="text-4xl font-bold text-red-600 mb-2 number-pulse">
                     450+
@@ -811,7 +840,7 @@ export default function Home() {
                 className="group cursor-pointer animate-fadeIn"
                 style={{ animationDelay: "1.0s" }}
               >
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-500 border border-green-200 hover:border-green-300">
+                <div className="bg-gray-800/80 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:shadow-green-500/20 transform hover:scale-105 transition-all duration-500">
                   <div className="text-2xl mb-3 animate-pulse">💰</div>
                   <div className="text-4xl font-bold text-green-600 mb-2 number-pulse">
                     ৳6L+
@@ -829,7 +858,7 @@ export default function Home() {
                 className="group cursor-pointer animate-fadeIn"
                 style={{ animationDelay: "1.1s" }}
               >
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-500 border border-blue-200 hover:border-blue-300">
+                <div className="bg-gray-800/80 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 transform hover:scale-105 transition-all duration-500">
                   <div className="text-2xl mb-3 animate-bounce delay-300">
                     👥
                   </div>
@@ -849,7 +878,7 @@ export default function Home() {
                 className="group cursor-pointer animate-fadeIn"
                 style={{ animationDelay: "1.2s" }}
               >
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-500 border border-yellow-200 hover:border-yellow-300">
+                <div className="bg-gray-800/80 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:shadow-yellow-500/20 transform hover:scale-105 transition-all duration-500">
                   <div className="text-2xl mb-3 animate-pulse delay-500">
                     📦
                   </div>
@@ -869,7 +898,7 @@ export default function Home() {
                 className="group cursor-pointer animate-fadeIn"
                 style={{ animationDelay: "1.3s" }}
               >
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-500 border border-purple-200 hover:border-purple-300">
+                <div className="bg-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:shadow-purple-500/20 transform hover:scale-105 transition-all duration-500">
                   <div className="text-2xl mb-3 animate-bounce delay-700">
                     ⭐
                   </div>
@@ -1006,8 +1035,8 @@ export default function Home() {
             className="text-center group animate-stepReveal"
             style={{ animationDelay: "0.4s" }}
           >
-            <div className="step-card bg-white rounded-2xl p-8 shadow-xl border-2 border-green-100 hover:border-green-300 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-emerald-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="step-card bg-gray-800/60 border border-green-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-green-500/20 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 to-emerald-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               <div
                 className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg animate-numberCount"
@@ -1055,8 +1084,8 @@ export default function Home() {
             className="text-center group animate-stepReveal"
             style={{ animationDelay: "0.6s" }}
           >
-            <div className="step-card bg-white rounded-2xl p-8 shadow-xl border-2 border-yellow-100 hover:border-yellow-300 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-orange-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="step-card bg-gray-800/60 border border-yellow-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-yellow-500/20 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-900/20 to-orange-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               <div
                 className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg animate-numberCount"
@@ -1128,7 +1157,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Emergency Blood Request - Urgent */}
           <div
-            className="activity-card bg-gradient-to-br from-red-50 to-red-100 shadow-xl border-l-4 border-red-400 rounded-xl relative overflow-hidden animate-activitySlideIn"
+            className="activity-card bg-gradient-to-br from-red-900/30 to-red-800/40 border border-red-500/30 shadow-xl rounded-xl relative overflow-hidden animate-activitySlideIn"
             style={{ animationDelay: "0.1s" }}
           >
             {/* Urgency Indicator */}
@@ -1156,10 +1185,10 @@ export default function Home() {
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-red-700 transition-colors duration-300">
+              <h3 className="text-xl font-bold text-gray-100 mb-3 group-hover:text-red-300 transition-colors duration-300">
                 Emergency Blood Request - B+ Needed
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed mb-6">
+              <p className="text-gray-300 text-sm leading-relaxed mb-6">
                 <span className="font-semibold text-red-700">Ahmed Rahman</span>{" "}
                 urgently needs B+ blood for surgery.
                 <span className="block mt-1 text-gray-600">
@@ -1243,7 +1272,7 @@ export default function Home() {
 
           {/* Lost & Found Success */}
           <div
-            className="activity-card bg-gradient-to-br from-blue-50 to-blue-100 shadow-xl border-l-4 border-blue-400 rounded-xl relative overflow-hidden animate-activitySlideIn"
+            className="activity-card bg-gradient-to-br from-blue-900/30 to-blue-800/40 border border-blue-500/30 shadow-xl rounded-xl relative overflow-hidden animate-activitySlideIn"
             style={{ animationDelay: "0.2s" }}
           >
             <div className="absolute inset-0 opacity-10">
@@ -1344,7 +1373,7 @@ export default function Home() {
 
           {/* Flood Relief Success */}
           <div
-            className="activity-card bg-gradient-to-br from-green-50 to-green-100 shadow-xl border-l-4 border-green-400 rounded-xl relative overflow-hidden animate-activitySlideIn"
+            className="activity-card bg-gradient-to-br from-green-900/30 to-green-800/40 border border-green-500/30 shadow-xl rounded-xl relative overflow-hidden animate-activitySlideIn"
             style={{ animationDelay: "0.3s" }}
           >
             <div className="absolute inset-0 opacity-10">
@@ -1446,7 +1475,7 @@ export default function Home() {
 
           {/* Tech Workshop Event */}
           <div
-            className="activity-card bg-gradient-to-br from-yellow-50 to-orange-100 shadow-xl border-l-4 border-yellow-400 rounded-xl relative overflow-hidden animate-activitySlideIn"
+            className="activity-card bg-gradient-to-br from-yellow-900/30 to-orange-800/40 border border-yellow-500/30 shadow-xl rounded-xl relative overflow-hidden animate-activitySlideIn"
             style={{ animationDelay: "0.4s" }}
           >
             <div className="absolute inset-0 opacity-10">
@@ -1702,6 +1731,7 @@ export default function Home() {
           </div>
         </div>
       </div> */}
+      </div>
     </div>
   );
 }

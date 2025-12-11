@@ -176,13 +176,14 @@ const Auction = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div className="container mx-auto px-4 py-8 font-inter">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-4">
           <span className="main-col">🛒 Campus Marketplace</span>
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-gray-300">
           Buy and sell second-hand items within the university community
         </p>
       </div>
@@ -285,7 +286,7 @@ const Auction = () => {
           {/* Items Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {getFilteredItems().map((item) => (
-              <div key={item.id} className="card bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <div key={item.id} className="card bg-gray-800/50 border border-purple-500/30 shadow-lg hover:shadow-xl hover:shadow-purple-500/20 transition-shadow">
                 <div className="card-body p-4">
                   {/* Item Header */}
                   <div className="flex items-start justify-between mb-3">
@@ -316,10 +317,10 @@ const Auction = () => {
                   </div>
 
                   {/* Description */}
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-3">{item.description}</p>
+                  <p className="text-gray-300 text-sm mb-3 line-clamp-3">{item.description}</p>
 
-                  {/* Seller Info */}
-                  <div className="flex items-center justify-between text-sm text-gray-600 mb-3">
+                  {/* Bidding Info */}
+                  <div className="flex items-center justify-between text-sm text-gray-300 mb-3">
                     <div className="flex items-center gap-1">
                       <span>👤</span>
                       <span>{item.seller}</span>
@@ -376,7 +377,7 @@ const Auction = () => {
 
           <div className="space-y-4">
             {myListings.map((listing) => (
-              <div key={listing.id} className="card bg-white shadow-lg">
+              <div key={listing.id} className="card bg-gray-800/50 border border-blue-500/30 shadow-lg">
                 <div className="card-body">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
@@ -391,7 +392,7 @@ const Auction = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-6 text-sm text-gray-600 mt-4">
+                  <div className="flex gap-6 text-sm text-gray-300 mt-4">
                     <div className="flex items-center gap-1">
                       <span>👁️</span>
                       <span>{listing.views} views</span>
@@ -421,7 +422,7 @@ const Auction = () => {
         <div className="text-center py-12">
           <div className="text-6xl mb-4">💝</div>
           <h3 className="text-2xl font-bold mb-4">Your Wishlist is Empty</h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-300 mb-6">
             Save items you're interested in to your wishlist for easy access later.
           </p>
           <button 
@@ -565,6 +566,7 @@ const Auction = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

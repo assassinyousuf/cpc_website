@@ -16,8 +16,6 @@ const Auth = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [captcha, setCaptcha] = useState('');
-  const [captchaInput, setCaptchaInput] = useState('');
 
   const { login, register } = useAuth();
   const navigate = useNavigate();
@@ -34,34 +32,12 @@ const Auth = () => {
     if (error) setError('');
   };
 
-  // Generate a simple captcha
-  const generateCaptcha = () => {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let str = '';
-    for (let i = 0; i < 5; i++) {
-      str += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return str;
-  };
 
-  // On registration mode, generate captcha
-  useEffect(() => {
-    if (!isLogin) {
-      setCaptcha(generateCaptcha());
-      setCaptchaInput('');
-    }
-  }, [isLogin]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
-    if (!isLogin && captchaInput !== captcha) {
-      setError('Captcha does not match. Please try again.');
-      setLoading(false);
-      return;
-    }
 
     try {
       if (isLogin) {
@@ -129,26 +105,26 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900">
       <div className="max-w-md w-full mx-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-gray-800/80 border border-blue-500/30 rounded-2xl shadow-xl shadow-blue-500/20 p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
-              {isLogin ? "Welcome Back!" : "Join oneCircle"}
+            <h1 className="text-3xl font-bold text-gray-100 mb-2">
+              {isLogin ? "Welcome Back!" : "Join CPC"}
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-300">
               {isLogin
                 ? "Sign in to access all features"
                 : "Create your account to get started"}
             </p>
 
             {isLogin && (
-              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-left">
-                <h4 className="font-semibold text-blue-800 text-sm mb-2">🔑 Admin Panel Demo Credentials:</h4>
-                <div className="text-xs text-blue-700 space-y-1">
+              <div className="mt-4 p-3 bg-blue-900/30 border border-blue-500/30 rounded-lg text-left">
+                <h4 className="font-semibold text-blue-300 text-sm mb-2">🔑 Admin Panel Demo Credentials:</h4>
+                <div className="text-xs text-blue-200 space-y-1">
                   <div>Username: <span className="font-mono">admin</span></div>
-                  <div>Password: <span className="font-mono">onecircle2025</span></div>
-                  <div className="text-xs text-gray-500">(Use these to access the Admin Panel at <span className="font-mono">/admin-panel</span>)</div>
+                  <div>Password: <span className="font-mono">cpc2025</span></div>
+                  <div className="text-xs text-gray-400">(Use these to access the Admin Panel at <span className="font-mono">/admin-panel</span>)</div>
                 </div>
               </div>
             )}
@@ -284,27 +260,6 @@ const Auth = () => {
                   onChange={handleInputChange}
                   className="input input-bordered w-full focus:input-primary"
                   placeholder="Confirm your password"
-                  required
-                />
-              </div>
-            )}
-
-            {!isLogin && (
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-semibold">Captcha</span>
-                </label>
-                <div className="flex items-center gap-2">
-                  <span className="px-4 py-2 bg-gray-100 rounded font-mono text-lg tracking-widest select-none border border-gray-300">{captcha}</span>
-                  <button type="button" className="btn btn-xs btn-outline" onClick={() => setCaptcha(generateCaptcha())}>Refresh</button>
-                </div>
-                <input
-                  type="text"
-                  name="captchaInput"
-                  value={captchaInput}
-                  onChange={e => setCaptchaInput(e.target.value.toUpperCase())}
-                  className="input input-bordered w-full focus:input-primary mt-2"
-                  placeholder="Enter captcha above"
                   required
                 />
               </div>

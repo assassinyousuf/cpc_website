@@ -44,12 +44,8 @@ const Profile = () => {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #6366f1 0%, #60a5fa 100%)',
-      padding: '40px 0',
-      fontFamily: 'Segoe UI, sans-serif',
-    }}>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white py-10">
+      <div className="container mx-auto px-4 max-w-4xl">
       <div style={{
         maxWidth: 700,
         margin: '0 auto',
@@ -187,6 +183,7 @@ const Profile = () => {
             </table>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

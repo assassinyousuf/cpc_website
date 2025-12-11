@@ -3,13 +3,13 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-white mt-16">
+      <footer className="bg-gray-900 border-t border-gray-800 mt-16">
         <div className="container mx-auto px-6 py-8 ">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <h3 className="font-bold text-lg mb-4 main-col">uniConnect</h3>
+              <h3 className="font-bold text-lg mb-4 main-col">CPC</h3>
               <p className="text-gray-600 text-sm">
-                A unified platform connecting students for causes, events, and
+                Computer Programming Club - A unified platform connecting students for causes, events, and
                 exchanges.
               </p>
             </div>

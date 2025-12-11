@@ -137,17 +137,18 @@ const BulletinDashboard = () => {
       case 'high': return 'bg-orange-100 text-orange-800 border-orange-200';
       case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
       case 'low': return 'bg-green-100 text-green-800 border-green-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      default: return 'bg-gray-700 text-gray-200 border-gray-600';
     }
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">📢 Bulletin Dashboard</h1>
-          <p className="text-gray-600">Welcome back, <span className="font-semibold text-blue-600">{user?.name}</span></p>
+          <h1 className="text-4xl font-bold text-gray-100 mb-2">📢 Bulletin Dashboard</h1>
+          <p className="text-gray-300">Welcome back, <span className="font-semibold text-blue-400">{user?.name}</span></p>
           <div className="badge badge-primary badge-sm mt-2">Bulletin Administrator</div>
         </div>
         <button
@@ -163,7 +164,7 @@ const BulletinDashboard = () => {
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-        <div className="stat bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+        <div className="stat bg-gradient-to-br from-blue-900/40 to-blue-800/40 border border-blue-500/30 rounded-lg">
           <div className="stat-figure text-blue-600">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -173,7 +174,7 @@ const BulletinDashboard = () => {
           <div className="stat-value text-blue-800">{stats.totalBulletins}</div>
         </div>
 
-        <div className="stat bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-200">
+        <div className="stat bg-gradient-to-br from-green-900/40 to-green-800/40 border border-green-500/30 rounded-lg">
           <div className="stat-figure text-green-600">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -183,7 +184,7 @@ const BulletinDashboard = () => {
           <div className="stat-value text-green-800">{stats.publishedBulletins}</div>
         </div>
 
-        <div className="stat bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg border border-yellow-200">
+        <div className="stat bg-gradient-to-br from-yellow-900/40 to-yellow-800/40 border border-yellow-500/30 rounded-lg">
           <div className="stat-figure text-yellow-600">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
@@ -193,7 +194,7 @@ const BulletinDashboard = () => {
           <div className="stat-value text-yellow-800">{stats.draftBulletins}</div>
         </div>
 
-        <div className="stat bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border border-purple-200">
+        <div className="stat bg-gradient-to-br from-purple-900/40 to-purple-800/40 border border-purple-500/30 rounded-lg">
           <div className="stat-figure text-purple-600">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -204,7 +205,7 @@ const BulletinDashboard = () => {
           <div className="stat-value text-purple-800">{stats.totalViews.toLocaleString()}</div>
         </div>
 
-        <div className="stat bg-gradient-to-br from-red-50 to-red-100 rounded-lg border border-red-200">
+        <div className="stat bg-gradient-to-br from-red-900/40 to-red-800/40 border border-red-500/30 rounded-lg">
           <div className="stat-figure text-red-600">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
@@ -326,10 +327,10 @@ const BulletinDashboard = () => {
 
       {/* Bulletins List */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">📋 Manage Bulletins</h2>
+        <h2 className="text-2xl font-bold text-gray-100 mb-6">📋 Manage Bulletins</h2>
         
         {bulletins.map((bulletin) => (
-          <div key={bulletin.id} className="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-blue-500">
+          <div key={bulletin.id} className="card bg-gray-800/50 border border-blue-500/30 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300">
             <div className="card-body">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
@@ -345,7 +346,7 @@ const BulletinDashboard = () => {
                       {bulletin.status.toUpperCase()}
                     </div>
                   </div>
-                  <p className="text-gray-600 mb-4">{bulletin.content}</p>
+                  <p className="text-gray-300 mb-4">{bulletin.content}</p>
                   <div className="flex items-center gap-4 text-sm text-gray-500">
                     <span>📅 {bulletin.date}</span>
                     <span>📊 {bulletin.views.toLocaleString()} views</span>
@@ -382,10 +383,11 @@ const BulletinDashboard = () => {
         {bulletins.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">📋</div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No bulletins yet</h3>
+            <h3 className="text-xl font-semibold text-gray-300 mb-2">No bulletins yet</h3>
             <p className="text-gray-500">Create your first bulletin to get started!</p>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

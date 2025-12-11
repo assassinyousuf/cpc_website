@@ -195,7 +195,7 @@ const Bulletin = () => {
       announcements: "bg-indigo-50 border-indigo-200",
       emergency: "bg-red-100 border-red-300"
     };
-    return colors[category] || "bg-white border-gray-200";
+    return colors[category] || "bg-gray-800/50 border-gray-600";
   };
 
   const formatDate = (dateStr) => {
@@ -223,7 +223,8 @@ const Bulletin = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div className="container mx-auto px-4 py-8 font-inter">
       {/* Header */}
       <div className="text-center mb-8">
         <div className="flex justify-between items-center mb-4">
@@ -374,7 +375,7 @@ const Bulletin = () => {
 
               {/* Content */}
               <div className="mb-4">
-                <p className="text-gray-700 leading-relaxed">{notice.content}</p>
+                <p className="text-gray-300 leading-relaxed">{notice.content}</p>
               </div>
 
               {/* Meta Information */}
@@ -482,6 +483,7 @@ const Bulletin = () => {
             <button className="btn btn-outline btn-sm mt-2">Manage Notifications</button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
