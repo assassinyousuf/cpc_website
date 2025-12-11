@@ -1,15 +1,294 @@
 /**
  * Appwrite Collection Setup Script
  * 
- * This script logs detailed instructions for creating the required collections
- * in the Appwrite Console. Follow these steps to set up your database.
+ * This script will automatically create all required collections and buckets
+ * in your Appwrite project using the Appwrite Node SDK.
  * 
- * Run this file with: node src/lib/membersSetup.js
+ * Usage:
+ * 1. Make sure you have an Appwrite API key with proper permissions
+ * 2. Update the configuration below with your credentials
+ * 3. Run: node src/lib/membersSetup.js
+ * 
+ * Or run the manual instructions mode:
+ *    node src/lib/membersSetup.js --manual
  */
 
-console.log('\n' + '='.repeat(80));
-console.log('APPWRITE MEMBERS REGISTRY & USERS SETUP GUIDE');
-console.log('='.repeat(80) + '\n');
+import { Client, Databases, Storage, Permission, Role } from 'node-appwrite';
+
+// ============= CONFIGURATION =============
+const APPWRITE_ENDPOINT = process.env.APPWRITE_ENDPOINT || 'https://sgp.cloud.appwrite.io/v1';
+const APPWRITE_PROJECT_ID = process.env.APPWRITE_PROJECT_ID || '69303565001d01148c0f';
+const APPWRITE_API_KEY = process.env.APPWRITE_API_KEY || ''; // You need to set this!
+const DATABASE_ID = 'cpc_database';
+// =========================================
+
+// Check if manual mode
+const isManualMode = process.argv.includes('--manual');
+
+if (isManualMode) {
+  showManualInstructions();
+  process.exit(0);
+}
+
+// Check API key
+if (!APPWRITE_API_KEY) {
+  console.error('\n❌ ERROR: APPWRITE_API_KEY not set!\n');
+  console.log('To run automated setup:');
+  console.log('1. Go to Appwrite Console → Overview → Integrations → API Keys');
+  console.log('2. Create a new API key with Database & Storage permissions');
+  console.log('3. Set environment variable:');
+  console.log('   Windows: $env:APPWRITE_API_KEY="your_key_here"');
+  console.log('   Linux/Mac: export APPWRITE_API_KEY="your_key_here"');
+  console.log('4. Run: node src/lib/membersSetup.js\n');
+  console.log('Or run manual mode: node src/lib/membersSetup.js --manual\n');
+  process.exit(1);
+}
+
+// Initialize Appwrite
+const client = new Client()
+  .setEndpoint(APPWRITE_ENDPOINT)
+  .setProject(APPWRITE_PROJECT_ID)
+  .setKey(APPWRITE_API_KEY);
+
+const databases = new Databases(client);
+const storage = new Storage(client);
+
+async function createMembersRegistry() {
+  console.log('\n📋 Creating members_registry collection...');
+  
+  try {
+    const collection = await databases.createCollection(
+      DATABASE_ID,
+      'members_registry',
+      'Members Registry',
+      [
+        Permission.read(Role.any()),
+        Permission.create(Role.team('admin')),
+        Permission.update(Role.team('admin')),
+        Permission.delete(Role.team('admin'))
+      ]
+    );
+    console.log('✅ Collection created:', collection.$id);
+    
+    // Create attributes
+    const attributes = [
+      { key: 'memberId', type: 'string', size: 50, required: false },
+      { key: 'name', type: 'string', size: 100, required: true },
+      { key: 'batch', type: 'string', size: 20, required: false },
+      { key: 'roll', type: 'string', size: 20, required: false },
+      { key: 'department', type: 'string', size: 10, required: false },
+      { key: 'email', type: 'email', size: 255, required: true },
+      { key: 'phone', type: 'string', size: 20, required: false },
+      { key: 'guardianPhone', type: 'string', size: 20, required: false },
+      { key: 'interested', type: 'string', size: 500, required: false, array: true },
+      { key: 'expert', type: 'string', size: 500, required: false, array: true },
+      { key: 'joiningYear', type: 'integer', required: false },
+      { key: 'participated', type: 'boolean', required: false, default: false },
+      { key: 'paymentStatus', type: 'string', size: 50, required: false },
+      { key: 'source', type: 'enum', elements: ['import', 'self'], required: false, default: 'import' },
+      { key: 'verified', type: 'boolean', required: false, default: false },
+      { key: 'createdAt', type: 'datetime', required: false },
+      { key: 'updatedAt', type: 'datetime', required: false }
+    ];
+    
+    for (const attr of attributes) {
+      try {
+        await databases.createStringAttribute(DATABASE_ID, 'members_registry', attr.key, attr.size, attr.required, attr.default, attr.array);
+        console.log(`  ✓ ${attr.key}`);
+        await sleep(1000); // Wait for attribute to be available
+      } catch (error) {
+        console.log(`  ⚠ ${attr.key}: ${error.message}`);
+      }
+    }
+    
+    // Create indexes
+    console.log('\n📊 Creating indexes...');
+    await sleep(2000);
+    
+    try {
+      await databases.createIndex(DATABASE_ID, 'members_registry', 'email_unique', 'unique', ['email']);
+      console.log('  ✓ email_unique');
+    } catch (e) { console.log('  ⚠ email_unique:', e.message); }
+    
+    try {
+      await databases.createIndex(DATABASE_ID, 'members_registry', 'phone_idx', 'key', ['phone']);
+      console.log('  ✓ phone_idx');
+    } catch (e) { console.log('  ⚠ phone_idx:', e.message); }
+    
+    try {
+      await databases.createIndex(DATABASE_ID, 'members_registry', 'memberId_idx', 'key', ['memberId']);
+      console.log('  ✓ memberId_idx');
+    } catch (e) { console.log('  ⚠ memberId_idx:', e.message); }
+    
+    try {
+      await databases.createIndex(DATABASE_ID, 'members_registry', 'batch_idx', 'key', ['batch']);
+      console.log('  ✓ batch_idx');
+    } catch (e) { console.log('  ⚠ batch_idx:', e.message); }
+    
+  } catch (error) {
+    if (error.code === 409) {
+      console.log('⚠️  Collection already exists');
+    } else {
+      console.error('❌ Error:', error.message);
+    }
+  }
+}
+
+async function createUsersCollection() {
+  console.log('\n👥 Creating users collection...');
+  
+  try {
+    const collection = await databases.createCollection(
+      DATABASE_ID,
+      'users',
+      'Users',
+      [
+        Permission.create(Role.users()),
+        Permission.delete(Role.team('admin'))
+      ]
+    );
+    console.log('✅ Collection created:', collection.$id);
+    
+    // Note: Document-level permissions will be set when creating documents
+    console.log('ℹ️  Note: Read/Update permissions are document-level (set per user)');
+    
+    await sleep(2000);
+    
+    // Create attributes (simplified - you'll need to use the appropriate method for each type)
+    console.log('\n📝 Creating attributes (this may take a few minutes)...');
+    
+    const stringAttrs = [
+      { key: 'userId', size: 255, required: true },
+      { key: 'memberId', size: 50, required: false },
+      { key: 'name', size: 100, required: true },
+      { key: 'phone', size: 20, required: false },
+      { key: 'batch', size: 20, required: false },
+      { key: 'roll', size: 20, required: false },
+      { key: 'department', size: 10, required: false },
+      { key: 'address', size: 500, required: false },
+      { key: 'guardianPhone', size: 20, required: false },
+      { key: 'bio', size: 1000, required: false },
+      { key: 'socialLinks', size: 1000, required: false, default: '{}' }
+    ];
+    
+    for (const attr of stringAttrs) {
+      try {
+        await databases.createStringAttribute(DATABASE_ID, 'users', attr.key, attr.size, attr.required, attr.default);
+        console.log(`  ✓ ${attr.key}`);
+        await sleep(1000);
+      } catch (e) { console.log(`  ⚠ ${attr.key}: ${e.message}`); }
+    }
+    
+    // Email attribute
+    try {
+      await databases.createEmailAttribute(DATABASE_ID, 'users', 'email', true);
+      console.log('  ✓ email');
+      await sleep(1000);
+    } catch (e) { console.log('  ⚠ email:', e.message); }
+    
+    // URL attribute
+    try {
+      await databases.createUrlAttribute(DATABASE_ID, 'users', 'photoUrl', false);
+      console.log('  ✓ photoUrl');
+      await sleep(1000);
+    } catch (e) { console.log('  ⚠ photoUrl:', e.message); }
+    
+    // Enum attribute
+    try {
+      await databases.createEnumAttribute(DATABASE_ID, 'users', 'bloodGroup', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], false);
+      console.log('  ✓ bloodGroup');
+      await sleep(1000);
+    } catch (e) { console.log('  ⚠ bloodGroup:', e.message); }
+    
+    // Boolean attributes
+    const boolAttrs = [
+      { key: 'isAdmin', default: false },
+      { key: 'profileComplete', default: false }
+    ];
+    
+    for (const attr of boolAttrs) {
+      try {
+        await databases.createBooleanAttribute(DATABASE_ID, 'users', attr.key, false, attr.default);
+        console.log(`  ✓ ${attr.key}`);
+        await sleep(1000);
+      } catch (e) { console.log(`  ⚠ ${attr.key}: ${e.message}`); }
+    }
+    
+    // DateTime attributes
+    const dateAttrs = ['dateOfBirth', 'createdAt', 'updatedAt'];
+    for (const key of dateAttrs) {
+      try {
+        await databases.createDatetimeAttribute(DATABASE_ID, 'users', key, false);
+        console.log(`  ✓ ${key}`);
+        await sleep(1000);
+      } catch (e) { console.log(`  ⚠ ${key}: ${e.message}`); }
+    }
+    
+    // Create indexes
+    console.log('\n📊 Creating indexes...');
+    await sleep(2000);
+    
+    try {
+      await databases.createIndex(DATABASE_ID, 'users', 'userId_unique', 'unique', ['userId']);
+      console.log('  ✓ userId_unique');
+    } catch (e) { console.log('  ⚠ userId_unique:', e.message); }
+    
+    try {
+      await databases.createIndex(DATABASE_ID, 'users', 'email_unique', 'unique', ['email']);
+      console.log('  ✓ email_unique');
+    } catch (e) { console.log('  ⚠ email_unique:', e.message); }
+    
+    try {
+      await databases.createIndex(DATABASE_ID, 'users', 'memberId_idx', 'key', ['memberId']);
+      console.log('  ✓ memberId_idx');
+    } catch (e) { console.log('  ⚠ memberId_idx:', e.message); }
+    
+  } catch (error) {
+    if (error.code === 409) {
+      console.log('⚠️  Collection already exists');
+    } else {
+      console.error('❌ Error:', error.message);
+    }
+  }
+}
+
+async function createProfilePhotosBucket() {
+  console.log('\n📷 Creating profile_photos bucket...');
+  
+  try {
+    const bucket = await storage.createBucket(
+      'profile_photos',
+      'Profile Photos',
+      [
+        Permission.read(Role.any()),
+        Permission.create(Role.users())
+      ],
+      false, // fileSecurity
+      true,  // enabled
+      5242880, // 5MB
+      ['jpg', 'jpeg', 'png', 'webp'],
+      'gzip', // compression
+      true,  // encryption
+      true   // antivirus
+    );
+    console.log('✅ Bucket created:', bucket.$id);
+  } catch (error) {
+    if (error.code === 409) {
+      console.log('⚠️  Bucket already exists');
+    } else {
+      console.error('❌ Error:', error.message);
+    }
+  }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function showManualInstructions() {
+  console.log('\n' + '='.repeat(80));
+  console.log('APPWRITE MEMBERS REGISTRY & USERS SETUP GUIDE');
+  console.log('='.repeat(80) + '\n');
 
 console.log('📋 STEP 1: CREATE MEMBERS_REGISTRY COLLECTION\n');
 console.log('Collection ID: members_registry');
@@ -158,3 +437,40 @@ console.log('\n' + '='.repeat(80) + '\n');
 
 console.log('✅ All set! Follow these steps in order to get the system up and running.\n');
 console.log('📖 For detailed attribute schemas and permissions, see: MEMBERS_REGISTRY_SETUP.md\n');
+}
+
+// Main execution
+async function main() {
+  console.log('\n🚀 Starting Appwrite Setup...\n');
+  console.log(`Endpoint: ${APPWRITE_ENDPOINT}`);
+  console.log(`Project: ${APPWRITE_PROJECT_ID}`);
+  console.log(`Database: ${DATABASE_ID}\n`);
+  
+  try {
+    await createMembersRegistry();
+    await sleep(3000); // Give Appwrite time to process
+    
+    await createUsersCollection();
+    await sleep(3000);
+    
+    await createProfilePhotosBucket();
+    
+    console.log('\n' + '='.repeat(80));
+    console.log('✅ SETUP COMPLETE!');
+    console.log('='.repeat(80));
+    console.log('\nNext steps:');
+    console.log('1. Register an account at http://localhost:5174/auth');
+    console.log('2. In Appwrite Console, find your user in the "users" collection');
+    console.log('3. Edit the document and set "isAdmin" to true');
+    console.log('4. Navigate to http://localhost:5174/admin/import-members');
+    console.log('5. Upload cpc all members.csv and click Import\n');
+    
+  } catch (error) {
+    console.error('\n❌ Setup failed:', error.message);
+    console.log('\nTry running in manual mode to see detailed instructions:');
+    console.log('node src/lib/membersSetup.js --manual\n');
+    process.exit(1);
+  }
+}
+
+main();

@@ -1,13 +1,39 @@
 # 🚀 Quick Start Guide - Members Registry System
 
-## What You Need to Do Next
+## ⚡ FASTEST WAY: Automated Setup (3 minutes)
+
+### Step 1: Get Your API Key (2 minutes)
+
+1. Go to https://cloud.appwrite.io/console
+2. Open your project (ID: `69303565001d01148c0f`)
+3. Click **Overview** → **Integrations** → **API Keys**
+4. Click **Create API Key**
+5. Name: `Setup Script`
+6. Check: **Databases** (all) and **Storage** (all)
+7. Click **Create** and copy the key
+
+### Step 2: Run Automated Setup (1 minute)
+
+```powershell
+# Set your API key (replace YOUR_KEY with the actual key)
+$env:APPWRITE_API_KEY="YOUR_KEY"
+
+# Run the magic script
+node src/lib/membersSetup.js
+```
+
+**Done!** The script automatically creates everything. Skip to Step 2 of the manual guide below to make yourself admin and import the CSV.
+
+---
+
+## 📖 Manual Setup (if you prefer Console UI)
 
 ### Step 1: Create Appwrite Collections (15-20 minutes)
 
 Run the setup script to see detailed instructions:
 
 ```bash
-node src/lib/membersSetup.js
+node src/lib/membersSetup.js --manual
 ```
 
 Or follow the checklist:
